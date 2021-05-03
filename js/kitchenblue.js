@@ -39,10 +39,10 @@ function formatSearchResults(jsonResults) {
   var jsonObject = JSON.parse(jsonResults);
   var siteCount = 0;
 
-  // if (jsonObject.results.length == 0) { // Task 5: Part 1
-  //   setNotFoundMessages(); // Task 5: Part 1
-  // } // Task 5: Part 1
-  // else { // Task 5: Part 1
+  if (jsonObject.results.length == 0) {
+    setNotFoundMessages(); 
+   } 
+  else { 
 
     $("#search-results-heading").text("Search Results");
     var formatedText = "";
@@ -50,11 +50,11 @@ function formatSearchResults(jsonResults) {
     jsonObject.results.forEach(
       function(item, index) {
 
-        // if (isADefunctSite(item.href)) { return; } // Task 5: Part 2
-        // siteCount++; // Task 5: Part 2
+         if (isADefunctSite(item.href)) { return; } // Task 5: Part 2
+        siteCount++; // Task 5: Part 2
 
         var thumbnail = item.thumbnail;
-        // if (thumbnail == "") { thumbnail = ""; }  // Task 5, Part 3, display images/generic_dish.jpg if thumbnail is empty
+        if (thumbnail == "") { thumbnail = ""; }  // Task 5, Part 3, display images/generic_dish.jpg if thumbnail is empty
 
         const href = item.href;
 
@@ -64,13 +64,13 @@ function formatSearchResults(jsonResults) {
       }
     );
 
-    //if (siteCount > 0) { // Task 5: Part 2
+    if (siteCount > 0) { 
       $("#results").html(formatedText);
-    // } // Task 5: Part 2
-    // else { // Task 5: Part 2
-      // setNotFoundMessages(); // Task 5: Part 2
-    // } // Task 5: Part 2
-  // } // Task 5: Part 1
+    } 
+     else { 
+      setNotFoundMessages(); 
+     } 
+   } 
 
 }
 
@@ -109,9 +109,9 @@ function performSearch(event) {
   // Callback handler for success
 
   request.done(function (response, textStatus, jqXHR){
-       formatSearchResults(response);  // Task 4 - uncomment
+       formatSearchResults(response);  
 
-      //$("#results").html("<p>" + response + "</p>");  // Task 4 - comment out
+      $("#results").html("<p>" + response + "</p>");  
   });
 
   // Callback handler for failure
@@ -146,7 +146,7 @@ function sanitizeInputs() {
   str = str.trim();
   $("#ingredients").val(str);
 
-  // Task 5, do the same for the field "contains"
+  
 }
 
 // This function disables the text fields and the two buttons
